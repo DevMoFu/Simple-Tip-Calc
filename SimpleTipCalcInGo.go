@@ -25,6 +25,6 @@ func main() {
 
 	var CostPerPerson = TotalCost(Price, Tax, Tip, People)
 
-	fmt.Printf("Total cost per person is %v \n", CostPerPerson)
+	fmt.Printf("Total cost per person is %v.2f \n", CostPerPerson)
 
 }
