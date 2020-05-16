@@ -1,30 +1,32 @@
-// Take args prices, tip. numOfPeople
-// Return total per person
-
 package main
 
-import "fmt"
+import (
+	"flag"
+	"fmt"
+)
 
-func TotalCost(Price, Tax, Tip float64, People uint) float64 {
+// TotalCost to calc total cost, tip and cost per person
+func TotalCost(Price, Tax, Tip float64, People uint) (float64, float64, float64) {
 	var taxConverted float64 = Tax / 100.0
-	var total float64 = Price + (1 + taxConverted)
-	var CostPerPerson float64 = total / float64(People)
-	return CostPerPerson
+	var tipConverted float64 = (Tip / 100.0)
+	var totalTip float64 = (Price * tipConverted)
+	var totalTot float64 = Price + (Price * taxConverted) + totalTip
+	var CostPerPerson float64 = totalTot / float64(People)
+	return totalTip, totalTot, CostPerPerson
 }
 
 func main() {
 	//args
-	/* 	var Price = flag.Float64("price", 0.0, "Price of goods")
-	   	var Tax = flag.Float64("Tax", 0.0, "State food tax")
-	   	var Tip = flag.Float64("tip", 0.0, "Percentage to Tip")
-	   	var People = flag.Uint("people", 0, "Number of people") */
-	var Price float64 = 10.0
-	var Tax float64 = 8.5
-	var Tip float64 = 15.0
-	var People uint = 3
+	var Price = flag.Float64("Price", 100.0, "Price of goods")
+	var Tax = flag.Float64("Tax", 8.5, "State food tax")
+	var Tip = flag.Float64("Tip", 15.0, "Percentage to Tip")
+	var People = flag.Uint("People", 3, "Number of people")
+	flag.Parse()
 
-	var CostPerPerson = TotalCost(Price, Tax, Tip, People)
+	var tip, total, CostPerPerson = TotalCost(*Price, *Tax, *Tip, *People)
 
-	fmt.Printf("Total cost per person is %v.2f \n", CostPerPerson)
+	fmt.Printf("\nTotal Tip: $%.2f\n", tip)
+	fmt.Printf("Total Cost post tip and tax: $%.2f\n", total)
+	fmt.Printf("Total cost per person: $%.2f\n\n", CostPerPerson) // %.2f
 
 }
