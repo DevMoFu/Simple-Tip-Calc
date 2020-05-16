@@ -4,7 +4,7 @@ This is a simple tip calculator app.
 
 ***Prerequisites:***
 - Have [Go](https://golang.org/doc/install) installed
-- Have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) install
+- Have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
 
 ***Instructions:***
 1. git clone https://github.com/DevMoFu/Simple-Tip-Calc-In-Go.git
