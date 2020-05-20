@@ -11,8 +11,15 @@ func TotalCost(Price, Tax, Tip float64, People uint) (float64, float64, float64)
 	var tipConverted float64 = (Tip / 100.0)
 	var totalTip float64 = (Price * tipConverted)
 	var totalTot float64 = Price + (Price * taxConverted) + totalTip
-	var CostPerPerson float64 = totalTot / float64(People)
-	return totalTip, totalTot, CostPerPerson
+	var costPerPerson float64 = totalTot / float64(People)
+	return totalTip, totalTot, costPerPerson
+}
+
+type userInput struct {
+	Price  float64
+	Tax    float64
+	Tip    float64
+	People uint
 }
 
 func main() {
@@ -23,10 +30,12 @@ func main() {
 	var People = flag.Uint("People", 3, "Number of people")
 	flag.Parse()
 
-	var tip, total, CostPerPerson = TotalCost(*Price, *Tax, *Tip, *People)
+	u := userInput{*Price, *Tax, *Tip, *People}
+
+	var tip, total, costPerPerson = TotalCost(u.Price, u.Tax, u.Tip, u.People)
 
 	fmt.Printf("\nTotal Tip: $%.2f\n", tip)
 	fmt.Printf("Total Cost post tip and tax: $%.2f\n", total)
-	fmt.Printf("Total cost per person: $%.2f\n\n", CostPerPerson) // %.2f
+	fmt.Printf("Total cost per person: $%.2f\n\n", costPerPerson) // %.2f
 
 }
